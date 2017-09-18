@@ -19,7 +19,7 @@ import com.xwl.net.mvplib.ui.base.contract.BasePresenter;
 public class DemoPresenter extends BasePresenter<IDemoContract.IView> implements IDemoContract.IPresenter {
     @Override
     public void loadData() {
-        DemoRepository.loadData(this, "加载中...", "小花", 99, new CommonModelCallback<CriterionBean<DemoBean>>() {
+        DemoRepository.loadData(this, "加载中...", "1", 99, new CommonModelCallback<CriterionBean<DemoBean>>() {
             @Override
             public void onSuccess(CriterionBean<DemoBean> demoBeanCriterionBean) {
                 super.onSuccess(demoBeanCriterionBean);
