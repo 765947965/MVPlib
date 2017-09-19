@@ -3,15 +3,22 @@ package com.xwl.net.mvplib.test.view;
 import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.xwl.net.mvplib.R;
 import com.xwl.net.mvplib.test.contract.IDemoContract;
 import com.xwl.net.mvplib.test.presenter.DemoPresenter;
 import com.xwl.net.mvplib.ui.base.view.AbstractBusinessActivity;
+import com.xwl.net.mvplib.util.jitter.Jitter;
 
+
+import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
 
@@ -24,7 +31,10 @@ import io.reactivex.functions.Consumer;
  */
 
 public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, DemoPresenter>
-        implements IDemoContract.IView {
+        implements IDemoContract.IView, Consumer<Object> {
+
+    @BindView(R.id.text)
+    TextView mText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +69,7 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
 
     @Override
     protected View createContentView(ViewGroup root) {
-        return null;
+        return getLayoutInflater().inflate(R.layout.demo_layout, root, false);
     }
 
     @Override
@@ -74,6 +84,28 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
 
     @Override
     public void showContent(String context) {
-        showToast(context);
+        mText.setText(context);
+    }
+
+    @OnClick({R.id.llt_demo})
+    public void onViewClicked(View view) {
+        Jitter.bind(view).subscribe(this).bufferObservable(view.getId());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Jitter.unBind();
+    }
+
+    @Override
+    public void accept(Object o) throws Exception {
+        switch ((int) o) {
+            case R.id.llt_demo:
+                showToast("click:" + o);
+                break;
+            default:
+                break;
+        }
     }
 }
