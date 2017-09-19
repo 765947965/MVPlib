@@ -1,9 +1,11 @@
 package com.xwl.net.mvplib.ui.base.view;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.xwl.net.mvplib.ui.base.contract.BaseMVPPresenter;
 import com.xwl.net.mvplib.ui.base.contract.IBaseMVPView;
 
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -19,17 +22,22 @@ import butterknife.Unbinder;
  * <br> Description:
  * <br>
  * <br> Author:      谢文良
- * <br> Date:        2017/9/14 11:08
+ * <br> Date:        2017/9/19 10:38
  */
 
-public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends BaseMVPPresenter<V>> extends AppCompatActivity
+public abstract class AbstractMVPFragment<V extends IBaseMVPView, P extends BaseMVPPresenter<V>> extends Fragment
         implements IBaseMVPView {
+
+    protected Activity mActivity;
 
     protected FrameLayout mRootViewGroup;
 
     protected P mPresenter;
 
     protected V mBaseView;
+
+    private Unbinder mUnBinder;
+
 
     /**
      * <br> Description: 创建Presenter
@@ -50,58 +58,54 @@ public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends Base
     protected abstract V createBaseView();
 
     /**
-     * <br> Description: onCreate
+     * <br> Description: 创建主布局
      * <br> Author:      谢文良
-     * <br> Date:        2017/9/15 9:39
+     * <br> Date:        2017/9/15 14:53
      *
-     * @param savedInstanceState Bundle
+     * @param root ViewGroup
+     * @return 主布局
      */
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mRootViewGroup = new FrameLayout(this);
+    protected abstract View createContentView(ViewGroup root);
+
+    @Nullable
+    @Override
+    public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                                   @Nullable Bundle savedInstanceState) {
+        mRootViewGroup = new FrameLayout(getActivity());
         mRootViewGroup.setLayoutParams(new FrameLayout.LayoutParams(-1, -1));
-        super.setContentView(mRootViewGroup);
+        View contentView = createContentView(mRootViewGroup);
+        if (contentView != null) {
+            mRootViewGroup.addView(contentView);
+        }
         mPresenter = createPresenter();
         mBaseView = createBaseView();
         if (mPresenter != null && mBaseView != null) {
             mPresenter.attachView(mBaseView);
         }
+        mUnBinder = ButterKnife.bind(mRootViewGroup);
+        return mRootViewGroup;
     }
 
     @Override
-    public final void setContentView(@LayoutRes int layoutResID) {
-        View view = getLayoutInflater().inflate(layoutResID, null);
-        setContentView(view);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (Activity) context;
     }
 
     @Override
-    public final void setContentView(View view) {
-        setContentView(view, null);
-    }
-
-    @Override
-    public final void setContentView(View view, ViewGroup.LayoutParams params) {
-        if (view != null) {
-            if (params != null) {
-                mRootViewGroup.addView(view, params);
-            } else {
-                mRootViewGroup.addView(view);
-            }
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mPresenter != null) {
             mPresenter.detachView();
             mBaseView = null;
         }
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
     }
-
 
     @Override
     public void showToast(String info) {
-        Toast.makeText(this, info, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, info, Toast.LENGTH_SHORT).show();
     }
 }
