@@ -1,9 +1,6 @@
-package com.xwl.net.mvplib.ui.base.contract;
+package com.xwl.net.mvplib.ui.base.reload;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

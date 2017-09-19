@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xwl.net.mvplib.R;
-import com.xwl.net.mvplib.ui.base.contract.BasePresenter;
-import com.xwl.net.mvplib.ui.base.contract.IBaseView;
+import com.xwl.net.mvplib.ui.base.contract.BaseBusinessPresenter;
+import com.xwl.net.mvplib.ui.base.contract.IBaseBusinessView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,8 +23,8 @@ import butterknife.Unbinder;
  * <br> Date:        2017/9/14 17:54
  */
 
-public abstract class AbstractBusinessActivity<V extends IBaseView, P extends BasePresenter<V>>
-        extends AbstractNetWorkActivity<V, P> {
+public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P extends BaseBusinessPresenter<V>>
+        extends AbstractNetWorkActivity<V, P> implements IBaseBusinessView {
     protected View mContentHeadView;
     private Unbinder mUnBinder;
 
@@ -114,5 +114,26 @@ public abstract class AbstractBusinessActivity<V extends IBaseView, P extends Ba
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
+    }
+
+    @Override
+    public void SystemExit() {
+        System.exit(0);
+    }
+
+
+    @Override
+    public void onFinish() {
+        willFinish();
+        finish();
+    }
+
+    /**
+     * <br> Description: finish前的回调
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/15 9:41
+     */
+    protected void willFinish() {
+
     }
 }

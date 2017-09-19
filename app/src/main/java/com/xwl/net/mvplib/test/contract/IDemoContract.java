@@ -1,6 +1,6 @@
 package com.xwl.net.mvplib.test.contract;
 
-import com.xwl.net.mvplib.ui.base.contract.IBaseView;
+import com.xwl.net.mvplib.ui.base.contract.IBaseBusinessView;
 
 /**
  * <br> ClassName:   ${className}
@@ -11,8 +11,9 @@ import com.xwl.net.mvplib.ui.base.contract.IBaseView;
  */
 
 public interface IDemoContract {
-    interface IView extends IBaseView {
+    interface IView extends IBaseBusinessView {
         void showContent(String context);
+        void permissions();
     }
 
     interface IPresenter {

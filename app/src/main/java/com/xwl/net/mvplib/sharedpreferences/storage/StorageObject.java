@@ -3,8 +3,8 @@ package com.xwl.net.mvplib.sharedpreferences.storage;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.paisheng.lib.storage.sharedpreferences.cryptographic.CryptographicObject;
-import com.paisheng.lib.storage.sharedpreferences.cryptographic.ICryptographicObject;
+import com.xwl.net.mvplib.sharedpreferences.cryptographic.CryptographicObject;
+import com.xwl.net.mvplib.sharedpreferences.cryptographic.ICryptographicObject;
 
 
 /**

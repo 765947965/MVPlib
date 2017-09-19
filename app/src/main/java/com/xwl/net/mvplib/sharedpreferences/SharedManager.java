@@ -5,12 +5,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import com.paisheng.lib.storage.sharedpreferences.storage.IStorageBaseType;
-import com.paisheng.lib.storage.sharedpreferences.storage.IStorageObject;
-import com.paisheng.lib.storage.sharedpreferences.storage.IStorageString;
-import com.paisheng.lib.storage.sharedpreferences.storage.StorageBaseType;
-import com.paisheng.lib.storage.sharedpreferences.storage.StorageObject;
-import com.paisheng.lib.storage.sharedpreferences.storage.StorageString;
+
+import com.xwl.net.mvplib.sharedpreferences.storage.IStorageBaseType;
+import com.xwl.net.mvplib.sharedpreferences.storage.IStorageObject;
+import com.xwl.net.mvplib.sharedpreferences.storage.IStorageString;
+import com.xwl.net.mvplib.sharedpreferences.storage.StorageBaseType;
+import com.xwl.net.mvplib.sharedpreferences.storage.StorageObject;
+import com.xwl.net.mvplib.sharedpreferences.storage.StorageString;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

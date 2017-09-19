@@ -1,6 +1,5 @@
 package com.xwl.net.mvplib.net.callback.modelback;
 
-import com.lzy.okgo.model.Response;
 
 /**
  * <br> ClassName:   CommonRequestCallback
@@ -22,7 +21,7 @@ public class CommonModelCallback<T> implements ICommonModelCallback<T> {
     }
 
     @Override
-    public void onFailure(Response<T> response) {
+    public void onFailure(T t, Throwable e) {
 
     }
 }

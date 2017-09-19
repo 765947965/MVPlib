@@ -6,7 +6,7 @@ import com.xwl.net.mvplib.net.callback.modelback.CommonModelCallback;
 import com.xwl.net.mvplib.test.contract.IDemoContract;
 import com.xwl.net.mvplib.test.model.bean.DemoBean;
 import com.xwl.net.mvplib.test.model.repository.DemoRepository;
-import com.xwl.net.mvplib.ui.base.contract.BasePresenter;
+import com.xwl.net.mvplib.ui.base.contract.BaseBusinessPresenter;
 
 /**
  * <br> ClassName:   ${className}
@@ -16,7 +16,7 @@ import com.xwl.net.mvplib.ui.base.contract.BasePresenter;
  * <br> Date:        2017/9/15 10:45
  */
 
-public class DemoPresenter extends BasePresenter<IDemoContract.IView> implements IDemoContract.IPresenter {
+public class DemoPresenter extends BaseBusinessPresenter<IDemoContract.IView> implements IDemoContract.IPresenter {
     @Override
     public void loadData() {
         DemoRepository.loadData(this, "加载中...", "1", 99, new CommonModelCallback<CriterionBean<DemoBean>>() {

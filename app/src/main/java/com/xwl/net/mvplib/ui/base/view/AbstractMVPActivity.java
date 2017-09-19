@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.xwl.net.mvplib.ui.base.contract.BasePresenter;
-import com.xwl.net.mvplib.ui.base.contract.IBaseView;
+import com.xwl.net.mvplib.ui.base.contract.BaseMVPPresenter;
+import com.xwl.net.mvplib.ui.base.contract.IBaseMVPView;
 
 /**
  * <br> ClassName:   ${className}
@@ -20,8 +20,8 @@ import com.xwl.net.mvplib.ui.base.contract.IBaseView;
  * <br> Date:        2017/9/14 11:08
  */
 
-public abstract class AbstractMVPActivity<V extends IBaseView, P extends BasePresenter<V>> extends AppCompatActivity
-        implements IBaseView {
+public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends BaseMVPPresenter<V>> extends AppCompatActivity
+        implements IBaseMVPView {
 
     protected FrameLayout mRootViewGroup;
 
@@ -103,23 +103,9 @@ public abstract class AbstractMVPActivity<V extends IBaseView, P extends BasePre
         }
     }
 
+
     @Override
     public void showToast(String info) {
         Toast.makeText(this, info, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onFinish() {
-        willFinish();
-        finish();
-    }
-
-    /**
-     * <br> Description: finish前的回调
-     * <br> Author:      谢文良
-     * <br> Date:        2017/9/15 9:41
-     */
-    protected void willFinish() {
-
     }
 }

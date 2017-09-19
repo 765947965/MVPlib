@@ -21,9 +21,9 @@ public interface IRequestManage {
 
     void closeAllCall();
 
-    <B> void onSuccess(Response<B> response);
+    <T> void onSuccess(T bean);
 
-    <B> void requestFail(Response<B> response);
+    <T> void requestFail(T bean, Throwable e);
 
     void requestNotNet();
 

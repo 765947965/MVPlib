@@ -15,14 +15,6 @@ import com.lzy.okgo.request.base.Request;
  */
 
 abstract class AbstractEncryptCallback<T> extends AbsCallback<T> {
-    @Override
-    public void onStart(Request<T, ? extends Request> request) {
-        if (request instanceof PostRequest) {
-            // todo
-        } else if (request instanceof GetRequest) {
-            // todo
-        }
-    }
 
     /**
      * <br> Description: 解密数据

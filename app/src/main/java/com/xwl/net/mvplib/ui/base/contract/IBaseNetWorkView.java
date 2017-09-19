@@ -1,5 +1,7 @@
 package com.xwl.net.mvplib.ui.base.contract;
 
+import com.xwl.net.mvplib.ui.base.reload.ReloadTips;
+
 /**
  * <br> ClassName:   ${className}
  * <br> Description:
@@ -8,7 +10,7 @@ package com.xwl.net.mvplib.ui.base.contract;
  * <br> Date:        2017/9/14 14:18
  */
 
-public interface IBaseView {
+public interface IBaseNetWorkView extends IBaseMVPView {
     void startLoadingAnim(String tips);
 
     void stopLoadingAnim();
@@ -16,8 +18,4 @@ public interface IBaseView {
     void showLoadErrorUI(ReloadTips mReloadTips);
 
     void dismissLoadErrorUI();
-
-    void showToast(String info);
-
-    void onFinish();
 }

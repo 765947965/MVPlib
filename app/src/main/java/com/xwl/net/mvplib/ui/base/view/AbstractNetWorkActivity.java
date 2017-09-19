@@ -3,9 +3,9 @@ package com.xwl.net.mvplib.ui.base.view;
 import android.app.ProgressDialog;
 import android.view.View;
 
-import com.xwl.net.mvplib.ui.base.contract.BasePresenter;
-import com.xwl.net.mvplib.ui.base.contract.IBaseView;
-import com.xwl.net.mvplib.ui.base.contract.ReloadTips;
+import com.xwl.net.mvplib.ui.base.contract.BaseNetWorkPresenter;
+import com.xwl.net.mvplib.ui.base.contract.IBaseNetWorkView;
+import com.xwl.net.mvplib.ui.base.reload.ReloadTips;
 
 
 /**
@@ -15,8 +15,8 @@ import com.xwl.net.mvplib.ui.base.contract.ReloadTips;
  * <br> Author:      谢文良
  * <br> Date:        2017/9/14 11:07
  */
-public abstract class AbstractNetWorkActivity<V extends IBaseView, P extends BasePresenter<V>>
-        extends AbstractMVPActivity<V, P> {
+public abstract class AbstractNetWorkActivity<V extends IBaseNetWorkView, P extends BaseNetWorkPresenter<V>>
+        extends AbstractMVPActivity<V, P> implements IBaseNetWorkView {
     private View mReloadTipsView;
     private ProgressDialog mProgressDialog;
 

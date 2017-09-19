@@ -94,6 +94,6 @@ public class HttpUtils {
      * @return PostRequest
      */
     public static <T> PostRequest<T> post(String url) {
-        return OkGo.<T>post(url).headers("test1", "value1").params("test2", "values");
+        return OkGo.<T>post(url);
     }
 }

@@ -1,6 +1,5 @@
 package com.xwl.net.mvplib.net.callback.modelback;
 
-import com.lzy.okgo.model.Response;
 
 /**
  * <br> ClassName:   ICommonRequestCallback
@@ -35,7 +34,8 @@ public interface ICommonModelCallback<T> {
      * <br> Author:      谢文良
      * <br> Date:        2017/8/8 9:47
      *
-     * @param response Response
+     * @param t T
+     * @param e Throwable
      */
-    void onFailure(Response<T> response);
+    void onFailure(T t, Throwable e);
 }

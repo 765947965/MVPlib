@@ -3,9 +3,9 @@ package com.xwl.net.mvplib.ui.base.contract;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
-import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.xwl.net.mvplib.net.IRequestManage;
+import com.xwl.net.mvplib.ui.base.reload.ReloadTips;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -18,9 +18,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * <br> Date:        2017/9/14 14:14
  */
 
-public class BasePresenter<V extends IBaseView> implements IRequestManage {
-
-    protected V mBaseIView;
+public class BaseNetWorkPresenter<V extends IBaseNetWorkView> extends BaseMVPPresenter<V> implements IRequestManage {
 
     private BlockingQueue<Object> mRequestList = new LinkedBlockingDeque<>();
 
@@ -28,12 +26,8 @@ public class BasePresenter<V extends IBaseView> implements IRequestManage {
 
     private AbsCallback callback;
 
-    public void attachView(V mBaseIView) {
-        this.mBaseIView = mBaseIView;
-    }
-
     public void detachView() {
-        mBaseIView = null;
+        super.detachView();
         closeAllCall();
     }
 
@@ -64,18 +58,18 @@ public class BasePresenter<V extends IBaseView> implements IRequestManage {
     }
 
     @Override
-    public <B> void onSuccess(Response<B> response) {
+    public <T> void onSuccess(T bean) {
         if (mBaseIView != null) {
             mBaseIView.dismissLoadErrorUI();
         }
     }
 
     @Override
-    public <B> void requestFail(Response<B> response) {
+    public <T> void requestFail(T bean, Throwable e) {
         if (mBaseIView != null) {
             mBaseIView.showLoadErrorUI(ReloadTips.getLoadErrorDefault());
-            if (response.getException() != null) {
-                mBaseIView.showToast(response.getException().getMessage());
+            if (e != null) {
+                mBaseIView.showToast(e.getMessage());
             }
         }
     }
