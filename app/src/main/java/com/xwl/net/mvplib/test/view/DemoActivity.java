@@ -31,7 +31,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, DemoPresenter>
-        implements IDemoContract.IView, Consumer<Object> {
+        implements IDemoContract.IView {
 
     @BindView(R.id.text)
     TextView mText;
@@ -89,23 +89,12 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
 
     @OnClick({R.id.llt_demo})
     public void onViewClicked(View view) {
-        Jitter.bind(view).subscribe(this).bufferObservable(view.getId());
+        Log.i("click:", view.toString());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Jitter.unBind();
-    }
-
-    @Override
-    public void accept(Object o) throws Exception {
-        switch ((int) o) {
-            case R.id.llt_demo:
-                showToast("click:" + o);
-                break;
-            default:
-                break;
-        }
+        Jitter.unBind(this);
     }
 }
