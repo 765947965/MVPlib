@@ -15,7 +15,7 @@ import com.xwl.net.mvplib.R;
 import com.xwl.net.mvplib.test.contract.IDemoContract;
 import com.xwl.net.mvplib.test.presenter.DemoPresenter;
 import com.xwl.net.mvplib.ui.base.view.AbstractBusinessActivity;
-import com.xwl.net.mvplib.util.jitter.Jitter;
+import com.xwl.net.mvplib.util.jitter.RxJitter;
 
 
 import butterknife.BindView;
@@ -32,7 +32,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, DemoPresenter>
-        implements IDemoContract.IView, Jitter.IEventObserver {
+        implements IDemoContract.IView, RxJitter.IEventObserver {
 
     @BindView(R.id.text)
     TextView mText;
@@ -94,13 +94,13 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
 
     @OnClick({R.id.llt_demo, R.id.text})
     public void onViewClicked(View view) {
-        Jitter.bind(view).subscribe(this).bufferEvent(view);
+        RxJitter.bind(view).subscribe(this).bufferEvent(view);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Jitter.unBind();
+        RxJitter.unBind();
     }
 
     @Override

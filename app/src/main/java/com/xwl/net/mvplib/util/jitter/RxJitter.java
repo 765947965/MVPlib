@@ -18,8 +18,8 @@ import io.reactivex.functions.Consumer;
  * <br> Date:        2017/9/19 11:40
  */
 
-public class Jitter {
-    private static Map<Object, Jitter> mJitters = new HashMap<>();
+public class RxJitter {
+    private static Map<Object, RxJitter> mJitters = new HashMap<>();
     private Observer<? super Object> mObserver;
     private IEventObserver mEventObserver;
     private Disposable mDisposable;
@@ -32,7 +32,7 @@ public class Jitter {
      * @param key key
      * @return Jitter
      */
-    public static Jitter bind(Object key) {
+    public static RxJitter bind(Object key) {
         return bind(key, 300, TimeUnit.MILLISECONDS);
     }
 
@@ -46,9 +46,9 @@ public class Jitter {
      * @param unit           the unit of time of {@code windowDuration}
      * @return Jitter
      */
-    public static Jitter bind(Object key, long windowDuration, TimeUnit unit) {
+    public static RxJitter bind(Object key, long windowDuration, TimeUnit unit) {
         if (!mJitters.containsKey(key)) {
-            mJitters.put(key, new Jitter(windowDuration, unit));
+            mJitters.put(key, new RxJitter(windowDuration, unit));
         }
         return mJitters.get(key);
     }
@@ -61,7 +61,7 @@ public class Jitter {
      * @param windowDuration time to wait before emitting another item after emitting the last item
      * @param unit           the unit of time of {@code windowDuration}
      */
-    private Jitter(long windowDuration, TimeUnit unit) {
+    private RxJitter(long windowDuration, TimeUnit unit) {
         mDisposable = new Observable<Object>() {
             @Override
             protected void subscribeActual(Observer<? super Object> observer) {
@@ -94,7 +94,7 @@ public class Jitter {
      * <br> Date:        2017/9/19 17:10
      */
     public static void unBind() {
-        for (Map.Entry<Object, Jitter> item : mJitters.entrySet()) {
+        for (Map.Entry<Object, RxJitter> item : mJitters.entrySet()) {
             item.getValue().mDisposable.dispose();
             item.getValue().subscribe(null);
         }
@@ -127,7 +127,7 @@ public class Jitter {
      * @param mEventObserver IEventObserver
      * @return Jitter
      */
-    public Jitter subscribe(IEventObserver mEventObserver) {
+    public RxJitter subscribe(IEventObserver mEventObserver) {
         this.mEventObserver = mEventObserver;
         return this;
     }
