@@ -96,7 +96,7 @@ public class Jitter {
     public static void unBind() {
         for (Map.Entry<Object, Jitter> item : mJitters.entrySet()) {
             item.getValue().mDisposable.dispose();
-            item.getValue().setEventObserver(null);
+            item.getValue().subscribe(null);
         }
         mJitters.clear();
     }
@@ -127,7 +127,7 @@ public class Jitter {
      * @param mEventObserver IEventObserver
      * @return Jitter
      */
-    public Jitter setEventObserver(IEventObserver mEventObserver) {
+    public Jitter subscribe(IEventObserver mEventObserver) {
         this.mEventObserver = mEventObserver;
         return this;
     }

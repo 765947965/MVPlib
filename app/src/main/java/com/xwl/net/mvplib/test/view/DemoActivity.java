@@ -94,7 +94,7 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
 
     @OnClick({R.id.llt_demo, R.id.text})
     public void onViewClicked(View view) {
-        Jitter.bind(view).setEventObserver(this).bufferEvent(view);
+        Jitter.bind(view).subscribe(this).bufferEvent(view);
     }
 
     @Override
