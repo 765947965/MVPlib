@@ -111,7 +111,6 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
                 break;
             case R.id.text:
                 Log.i("click:", o.toString());
-                startActivity(new Intent(this, getClass()));
                 break;
         }
     }
