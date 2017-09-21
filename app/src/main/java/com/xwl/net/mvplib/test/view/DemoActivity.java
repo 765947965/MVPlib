@@ -1,6 +1,7 @@
 package com.xwl.net.mvplib.test.view;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -31,7 +32,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, DemoPresenter>
-        implements IDemoContract.IView {
+        implements IDemoContract.IView, Jitter.IEventObserver {
 
     @BindView(R.id.text)
     TextView mText;
@@ -39,7 +40,11 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("测试Demo");
+        if (getIntent() != null) {
+            setTitle("测试Demo" + getIntent().toString());
+        } else {
+            setTitle("测试Demo");
+        }
         permissions();
     }
 
@@ -87,14 +92,27 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
         mText.setText(context);
     }
 
-    @OnClick({R.id.llt_demo})
+    @OnClick({R.id.llt_demo, R.id.text})
     public void onViewClicked(View view) {
-        Log.i("click:", view.toString());
+        Jitter.bind(view).setEventObserver(this).bufferEvent(view);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Jitter.unBind(this);
+        Jitter.unBind();
+    }
+
+    @Override
+    public void onEvent(Object o) {
+        switch (((View) o).getId()) {
+            case R.id.llt_demo:
+                Log.i("click:", o.toString());
+                break;
+            case R.id.text:
+                Log.i("click:", o.toString());
+                startActivity(new Intent(this, getClass()));
+                break;
+        }
     }
 }
