@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,8 +25,14 @@ import butterknife.Unbinder;
 
 public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P extends BaseBusinessPresenter<V>>
         extends AbstractNetWorkActivity<V, P> implements IBaseBusinessView {
-    protected View mContentHeadView;
     private Unbinder mUnBinder;
+
+    /*** 标题右侧控件 ***/
+    protected ImageView mIvLeft;
+    /*** 标题正文 ***/
+    protected TextView mTvTitle;
+    /*** 标题右侧控件 ***/
+    protected TextView mTvRight;
 
     /**
      * <br> Description: onCreate
@@ -35,19 +41,25 @@ public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P ex
      *
      * @param savedInstanceState Bundle
      */
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abstract_business_activity);
         LinearLayout mLltMain = (LinearLayout) findViewById(R.id.lltMain);
-        mContentHeadView = createHeadView(mLltMain);
-        if (mContentHeadView != null) {
+        int headViewId = createHeadViewId();
+        View mContentHeadView = null;
+        if (headViewId != 0) {
+            mContentHeadView = getLayoutInflater().inflate(headViewId, mLltMain, false);
             mLltMain.addView(mContentHeadView);
         }
-        View mContentView = createContentView(mLltMain);
-        if (mContentView != null) {
+        int contentViewId = createContentViewId();
+        View mContentView = null;
+        if (contentViewId != 0) {
+            mContentView = getLayoutInflater().inflate(contentViewId, mLltMain, false);
             mLltMain.addView(mContentView);
         }
         mUnBinder = ButterKnife.bind(this);
+        initHeadView(mContentHeadView);
+        onCreateContent(mContentView, savedInstanceState);
     }
 
     /**
@@ -55,19 +67,40 @@ public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P ex
      * <br> Author:      谢文良
      * <br> Date:        2017/9/15 9:40
      *
-     * @param root ViewGroup
      * @return View
      */
-    protected View createHeadView(ViewGroup root) {
-        View view = getLayoutInflater().inflate(R.layout.abstract_business_title, root, false);
-        view.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                willFinish();
-                finish();
+    protected int createHeadViewId() {
+        return R.layout.abstract_business_title;
+    }
+
+    /**
+     * <br> Description: 初始化头部
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/21 14:28
+     *
+     * @param mContentHeadView mContentHeadView
+     */
+    protected void initHeadView(View mContentHeadView) {
+        if (mContentHeadView != null) {
+            if (mContentHeadView.findViewById(R.id.iv_close) instanceof ImageView) {
+                mIvLeft = (ImageView) mContentHeadView.findViewById(R.id.iv_close);
             }
-        });
-        return view;
+            if (mContentHeadView.findViewById(R.id.tv_title) instanceof TextView) {
+                mTvTitle = (TextView) mContentHeadView.findViewById(R.id.tv_title);
+            }
+            if (mContentHeadView.findViewById(R.id.tv_right) instanceof TextView) {
+                mTvRight = (TextView) mContentHeadView.findViewById(R.id.tv_right);
+            }
+            if (mIvLeft != null) {
+                mIvLeft.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        willFinish();
+                        finish();
+                    }
+                });
+            }
+        }
     }
 
     /**
@@ -75,10 +108,19 @@ public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P ex
      * <br> Author:      谢文良
      * <br> Date:        2017/9/15 14:53
      *
-     * @param root ViewGroup
      * @return 主布局
      */
-    protected abstract View createContentView(ViewGroup root);
+    protected abstract int createContentViewId();
+
+    /**
+     * <br> Description: 创建初始化(相关View的初始化都在这里进行，这里已经可以使用ButterKnife绑定的View变量了)
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/15 14:53
+     *
+     * @param view               主布局
+     * @param savedInstanceState Bundle
+     */
+    protected abstract void onCreateContent(View view, Bundle savedInstanceState);
 
     /**
      * <br> Description: 设置标题
@@ -88,24 +130,9 @@ public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P ex
      * @param title 标题
      */
     protected void setTitle(String title) {
-        if (!TextUtils.isEmpty(title) && mContentHeadView != null
-                && mContentHeadView.findViewById(R.id.tv_title) != null) {
-            ((TextView) mContentHeadView.findViewById(R.id.tv_title)).setText(title);
+        if (!TextUtils.isEmpty(title) && mTvTitle != null) {
+            mTvTitle.setText(title);
         }
-    }
-
-    /**
-     * <br> Description: 返回标题右侧控件
-     * <br> Author:      谢文良
-     * <br> Date:        2017/9/15 9:40
-     *
-     * @return 标题右侧控件
-     */
-    protected TextView getRightView() {
-        if (mContentHeadView != null) {
-            return (TextView) mContentHeadView.findViewById(R.id.tv_right);
-        }
-        return null;
     }
 
     @Override

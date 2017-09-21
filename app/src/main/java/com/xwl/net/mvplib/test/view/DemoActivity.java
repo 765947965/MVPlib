@@ -1,12 +1,9 @@
 package com.xwl.net.mvplib.test.view;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tbruyelle.rxpermissions2.Permission;
@@ -38,8 +35,12 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
     TextView mText;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int createContentViewId() {
+        return R.layout.demo_layout;
+    }
+
+    @Override
+    protected void onCreateContent(View view, Bundle savedInstanceState) {
         if (getIntent() != null) {
             setTitle("测试Demo" + getIntent().toString());
         } else {
@@ -70,11 +71,6 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
                         }
                     }
                 });
-    }
-
-    @Override
-    protected View createContentView(ViewGroup root) {
-        return getLayoutInflater().inflate(R.layout.demo_layout, root, false);
     }
 
     @Override
