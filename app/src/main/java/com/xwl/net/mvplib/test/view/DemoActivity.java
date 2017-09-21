@@ -41,11 +41,7 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
 
     @Override
     protected void onCreateContent(View view, Bundle savedInstanceState) {
-        if (getIntent() != null) {
-            setTitle("测试Demo" + getIntent().toString());
-        } else {
-            setTitle("测试Demo");
-        }
+        setTitle("测试Demo");
         permissions();
     }
 

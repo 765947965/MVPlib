@@ -147,7 +147,7 @@ public abstract class AbstractMVPFragment<V extends IBaseMVPView, P extends Base
                 mIsLoadUI = true;
                 View view = mActivity.getLayoutInflater().inflate(resId, mRootViewGroup, false);
                 mRootViewGroup.addView(view);
-                mUnBinder = ButterKnife.bind(mRootViewGroup);
+                mUnBinder = ButterKnife.bind(this, mRootViewGroup);
                 onCreateContent(view, mSavedInstanceState);
             }
         } else {
