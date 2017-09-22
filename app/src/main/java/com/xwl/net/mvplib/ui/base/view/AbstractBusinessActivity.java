@@ -144,7 +144,7 @@ public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P ex
     }
 
     @Override
-    public void SystemExit() {
+    public void systemExit() {
         System.exit(0);
     }
 

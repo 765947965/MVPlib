@@ -1,9 +1,6 @@
 package com.xwl.net.mvplib.net.callback;
 
 import com.lzy.okgo.callback.AbsCallback;
-import com.lzy.okgo.request.GetRequest;
-import com.lzy.okgo.request.PostRequest;
-import com.lzy.okgo.request.base.Request;
 
 
 /**

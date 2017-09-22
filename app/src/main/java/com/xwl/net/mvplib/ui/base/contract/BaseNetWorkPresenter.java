@@ -22,10 +22,11 @@ public class BaseNetWorkPresenter<V extends IBaseNetWorkView> extends BaseMVPPre
 
     private BlockingQueue<Object> mRequestList = new LinkedBlockingDeque<>();
 
-    private Request request;
+    private Request mRequest;
 
-    private AbsCallback callback;
+    private AbsCallback mCallback;
 
+    @Override
     public void detachView() {
         super.detachView();
         closeAllCall();
@@ -90,14 +91,14 @@ public class BaseNetWorkPresenter<V extends IBaseNetWorkView> extends BaseMVPPre
 
     @Override
     public void setRetryRequest(Request request, AbsCallback callback) {
-        this.request = request;
-        this.callback = callback;
+        this.mRequest = request;
+        this.mCallback = callback;
     }
 
     @Override
     public void retryRequest() {
-        if (request != null && callback != null) {
-            request.execute(callback);
+        if (mRequest != null && mCallback != null) {
+            mRequest.execute(mCallback);
         }
     }
 }

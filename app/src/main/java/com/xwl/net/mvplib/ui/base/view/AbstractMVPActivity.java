@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.xwl.net.mvplib.ui.base.contract.BaseMVPPresenter;
 import com.xwl.net.mvplib.ui.base.contract.IBaseMVPView;
 
-import butterknife.Unbinder;
 
 /**
  * <br> ClassName:   ${className}
@@ -22,8 +21,8 @@ import butterknife.Unbinder;
  * <br> Date:        2017/9/14 11:08
  */
 
-public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends BaseMVPPresenter<V>> extends AppCompatActivity
-        implements IBaseMVPView {
+public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends BaseMVPPresenter<V>>
+        extends AppCompatActivity implements IBaseMVPView {
 
     protected FrameLayout mRootViewGroup;
 

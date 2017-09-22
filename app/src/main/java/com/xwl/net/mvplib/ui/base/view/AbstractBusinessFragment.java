@@ -16,7 +16,7 @@ public abstract class AbstractBusinessFragment<V extends IBaseBusinessView, P ex
         extends AbstractNetWorkFragment<V, P> implements IBaseBusinessView {
 
     @Override
-    public void SystemExit() {
+    public void systemExit() {
         System.exit(0);
     }
 

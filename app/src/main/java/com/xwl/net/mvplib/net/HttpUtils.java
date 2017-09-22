@@ -11,7 +11,6 @@ import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
-import com.lzy.okgo.request.HeadRequest;
 import com.lzy.okgo.request.PostRequest;
 import com.xwl.net.mvplib.R;
 

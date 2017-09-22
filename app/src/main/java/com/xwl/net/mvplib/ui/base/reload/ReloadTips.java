@@ -19,24 +19,43 @@ import com.xwl.net.mvplib.R;
  */
 
 public class ReloadTips {
-    private String title;
-    private String firstContent;
-    private String secondContent;
-    private String imageUrl;
-    private int imageResId;
-    private View view;
+    private String mTitle;
+    private String mFirstContent;
+    private String mSecondContent;
+    private String mImageUrl;
+    private int mImageResId;
+    private View mView;
 
+    /**
+     * <br> Description: 构造函数
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/22 15:55
+     *
+     * @param title         title
+     * @param firstContent  firstContent
+     * @param secondContent secondContent
+     * @param imageResId    imageResId
+     */
     public ReloadTips(String title, String firstContent, String secondContent, int imageResId) {
-        this.title = title;
-        this.firstContent = firstContent;
-        this.secondContent = secondContent;
-        this.imageResId = imageResId;
+        this.mTitle = title;
+        this.mFirstContent = firstContent;
+        this.mSecondContent = secondContent;
+        this.mImageResId = imageResId;
     }
 
+    /**
+     * <br> Description: 构造函数
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/22 15:55
+     *
+     * @param title        title
+     * @param firstContent firstContent
+     * @param imageResId   imageResId
+     */
     public ReloadTips(String title, String firstContent, int imageResId) {
-        this.title = title;
-        this.firstContent = firstContent;
-        this.imageResId = imageResId;
+        this.mTitle = title;
+        this.mFirstContent = firstContent;
+        this.mImageResId = imageResId;
     }
 
     public static ReloadTips getLoadErrorDefault() {
@@ -48,53 +67,62 @@ public class ReloadTips {
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.mTitle = title;
     }
 
     public String getFirstContent() {
-        return firstContent;
+        return mFirstContent;
     }
 
     public void setFirstContent(String firstContent) {
-        this.firstContent = firstContent;
+        this.mFirstContent = firstContent;
     }
 
     public String getSecondContent() {
-        return secondContent;
+        return mSecondContent;
     }
 
     public void setSecondContent(String secondContent) {
-        this.secondContent = secondContent;
+        this.mSecondContent = secondContent;
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return mImageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.mImageUrl = imageUrl;
     }
 
     public int getImageResId() {
-        return imageResId;
+        return mImageResId;
     }
 
     public void setImageResId(int imageResId) {
-        this.imageResId = imageResId;
+        this.mImageResId = imageResId;
     }
 
+    /**
+     * <br> Description: 获取情感图View
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/22 15:56
+     *
+     * @param context context
+     * @param root    root
+     * @return View
+     */
     public View getView(Context context, ViewGroup root) {
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.reload_tips_layout, root, false);
-            ((ImageView) view.findViewById(R.id.iv_image)).setImageResource(imageResId);
-            ((TextView) view.findViewById(R.id.tv_title)).setText(title);
-            ((TextView) view.findViewById(R.id.tv_content1)).setText(firstContent);
-            ((TextView) view.findViewById(R.id.tv_content2)).setText(secondContent);
+        if (mView == null) {
+            mView = LayoutInflater.from(context).inflate(R.layout.reload_tips_layout, root, false);
+            ((ImageView) mView.findViewById(R.id.iv_image)).setImageResource(mImageResId);
+            ((TextView) mView.findViewById(R.id.tv_title)).setText(mTitle);
+            ((TextView) mView.findViewById(R.id.tv_content1)).setText(mFirstContent);
+            ((TextView) mView.findViewById(R.id.tv_content2)).setText(mSecondContent);
         }
-        return view;
+        return mView;
     }
 }

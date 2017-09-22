@@ -84,6 +84,13 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
         mText.setText(context);
     }
 
+    /**
+     * <br> Description: 点击事件
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/22 15:58
+     *
+     * @param view View
+     */
     @OnClick({R.id.llt_demo, R.id.text})
     public void onViewClicked(View view) {
         RxJitter.bind(view).subscribe(this).bufferEvent(view);
@@ -103,6 +110,8 @@ public class DemoActivity extends AbstractBusinessActivity<IDemoContract.IView, 
                 break;
             case R.id.text:
                 Log.i("click:", o.toString());
+                break;
+            default:
                 break;
         }
     }
