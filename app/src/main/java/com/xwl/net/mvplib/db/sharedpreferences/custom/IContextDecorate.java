@@ -1,8 +1,8 @@
-package com.xwl.net.mvplib.sharedpreferences.cryptographic;
+package com.xwl.net.mvplib.db.sharedpreferences.custom;
 
 /**
  * @author: xiewenliang
- * @Filename:
+ * @Filename: IContextDecorate
  * @Description: 密钥与密文组装接口
  * @Copyright: Copyright (c) 2017 Tuandai Inc. All rights reserved.
  * @date: 2017/5/11 14:17
@@ -19,18 +19,10 @@ public interface IContextDecorate {
     String getDecorateContext(String key, String cipherText);
 
     /**
-     * 获取密钥
+     * 获取密钥和密文
      *
      * @param decorateContext 密文和密钥组装后的字符串
-     * @return 返回密钥
+     * @return 返回密钥和密文
      */
-    String getKey(String decorateContext);
-
-    /**
-     * 获取密文
-     *
-     * @param decorateContext 密文和密钥组装后的字符串
-     * @return 返回密文
-     */
-    String getCipherText(String decorateContext);
+    String[] getKeyAndCipherText(String decorateContext);
 }

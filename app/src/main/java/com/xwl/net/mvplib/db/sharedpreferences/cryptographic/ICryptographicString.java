@@ -1,4 +1,4 @@
-package com.xwl.net.mvplib.sharedpreferences.cryptographic;
+package com.xwl.net.mvplib.db.sharedpreferences.cryptographic;
 
 /**
  * @author: xiewenliang

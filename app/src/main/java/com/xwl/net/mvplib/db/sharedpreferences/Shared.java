@@ -1,4 +1,4 @@
-package com.xwl.net.mvplib.sharedpreferences;
+package com.xwl.net.mvplib.db.sharedpreferences;
 
 import android.content.Context;
 

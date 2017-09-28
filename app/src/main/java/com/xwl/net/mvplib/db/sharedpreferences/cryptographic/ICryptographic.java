@@ -1,4 +1,4 @@
-package com.xwl.net.mvplib.sharedpreferences.cryptographic;
+package com.xwl.net.mvplib.db.sharedpreferences.cryptographic;
 
 /**
  * @author: xiewenliang
@@ -27,5 +27,12 @@ public interface ICryptographic {
      */
     byte[] decodeByte(byte[] context, String key);
 
+    /**
+     * <br> Description: 获取加密key
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/27 16:08
+     *
+     * @return 返回加密key
+     */
     String getKey();
 }

@@ -1,4 +1,4 @@
-package com.xwl.net.mvplib.sharedpreferences;
+package com.xwl.net.mvplib.db.sharedpreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,12 +6,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 
-import com.xwl.net.mvplib.sharedpreferences.storage.IStorageBaseType;
-import com.xwl.net.mvplib.sharedpreferences.storage.IStorageObject;
-import com.xwl.net.mvplib.sharedpreferences.storage.IStorageString;
-import com.xwl.net.mvplib.sharedpreferences.storage.StorageBaseType;
-import com.xwl.net.mvplib.sharedpreferences.storage.StorageObject;
-import com.xwl.net.mvplib.sharedpreferences.storage.StorageString;
+import com.xwl.net.mvplib.db.sharedpreferences.storage.IStorageBaseType;
+import com.xwl.net.mvplib.db.sharedpreferences.storage.StorageBaseType;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -35,29 +31,29 @@ public class SharedManager {
     /**
      * SharedPreferences类
      */
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences mSharedPreferences;
     /**
-     * 对象存储
+     * 类型存储
      */
-    private IStorageObject storageObject;
-    /**
-     * 字符串存储
-     */
-    private IStorageString storageString;
-    /**
-     * 基本数据类型存储
-     */
-    private IStorageBaseType storageBaseType;
+    private IStorageBaseType mStorageBaseType;
 
+    /**
+     * <br> Description: 构造函数
+     * <br> Author:      谢文良
+     * <br> Date:        2017/9/27 16:14
+     *
+     * @param context      上下文
+     * @param sharedConfig 基础配置
+     */
     private SharedManager(Context context, SharedConfig sharedConfig) {
         if (context == null) {
             throw new IllegalArgumentException("You cannot with a null Context");
         } else {
             context = context.getApplicationContext() == null ? context : context.getApplicationContext();
-            sharedPreferences = context.getSharedPreferences(sharedConfig.getShareFlag() + sharedConfig.getShareFileName() + (sharedConfig.isVersionControl() ? getVersion(context) : ""), sharedConfig.getShareMode());
-            storageObject = new StorageObject(sharedPreferences);
-            storageString = new StorageString(sharedPreferences);
-            storageBaseType = new StorageBaseType(sharedPreferences);
+            mSharedPreferences = context.getSharedPreferences(sharedConfig.getShareFileName(),
+                    sharedConfig.getShareMode());
+            mStorageBaseType = new StorageBaseType(mSharedPreferences, sharedConfig.getShareFlag(),
+                    getVersion(context, sharedConfig.isVersionControl()));
         }
     }
 
@@ -86,7 +82,7 @@ public class SharedManager {
      * 清除存储的数据
      */
     public void clear() {
-        sharedPreferences.edit().clear().apply();
+        mSharedPreferences.edit().clear().apply();
     }
 
     /**
@@ -96,7 +92,7 @@ public class SharedManager {
      * @param value 值
      */
     public void putString(String key, String value) {
-        storageString.putString(key, value);
+        mStorageBaseType.putString(key, value);
     }
 
     /**
@@ -107,7 +103,7 @@ public class SharedManager {
      * @return 返回字符串
      */
     public String getString(String key, String defValue) {
-        return storageString.getString(key, defValue);
+        return mStorageBaseType.getString(key, defValue);
     }
 
     /**
@@ -117,7 +113,7 @@ public class SharedManager {
      * @param value 值
      */
     public void putInt(String key, int value) {
-        storageBaseType.putInt(key, value);
+        mStorageBaseType.putInt(key, value);
     }
 
     /**
@@ -128,7 +124,7 @@ public class SharedManager {
      * @return 返回int
      */
     public int getInt(String key, int defValue) {
-        return storageBaseType.getInt(key, defValue);
+        return mStorageBaseType.getInt(key, defValue);
     }
 
     /**
@@ -138,7 +134,7 @@ public class SharedManager {
      * @param value 值
      */
     public void putLong(String key, long value) {
-        storageBaseType.putLong(key, value);
+        mStorageBaseType.putLong(key, value);
     }
 
     /**
@@ -149,7 +145,7 @@ public class SharedManager {
      * @return 返回long
      */
     public long getLong(String key, long defValue) {
-        return storageBaseType.getLong(key, defValue);
+        return mStorageBaseType.getLong(key, defValue);
     }
 
     /**
@@ -159,7 +155,7 @@ public class SharedManager {
      * @param value 值
      */
     public void putFloat(String key, float value) {
-        storageBaseType.putFloat(key, value);
+        mStorageBaseType.putFloat(key, value);
     }
 
     /**
@@ -170,7 +166,28 @@ public class SharedManager {
      * @return 返回float
      */
     public float getFloat(String key, float defValue) {
-        return storageBaseType.getFloat(key, defValue);
+        return mStorageBaseType.getFloat(key, defValue);
+    }
+
+    /**
+     * 保存double
+     *
+     * @param key   键
+     * @param value 值
+     */
+    public void putDouble(String key, double value) {
+        mStorageBaseType.putDouble(key, value);
+    }
+
+    /**
+     * 获取double
+     *
+     * @param key      键
+     * @param defValue 默认值
+     * @return 返回float
+     */
+    public double getDouble(String key, double defValue) {
+        return mStorageBaseType.getDouble(key, defValue);
     }
 
     /**
@@ -180,7 +197,7 @@ public class SharedManager {
      * @param value 值
      */
     public void putBoolean(String key, boolean value) {
-        storageBaseType.putBoolean(key, value);
+        mStorageBaseType.putBoolean(key, value);
     }
 
     /**
@@ -191,7 +208,7 @@ public class SharedManager {
      * @return 返回boolean
      */
     public boolean getBoolean(String key, boolean defValue) {
-        return storageBaseType.getBoolean(key, defValue);
+        return mStorageBaseType.getBoolean(key, defValue);
     }
 
     /**
@@ -201,22 +218,26 @@ public class SharedManager {
      * @return 是否包涵
      */
     public boolean contains(String key) {
-        return sharedPreferences.contains(key);
+        return mSharedPreferences.contains(key);
     }
 
     /**
      * 返回版本号
      *
-     * @param context Context
+     * @param context          Context
+     * @param isVersionControl 是否需要版本控制
      * @return 版本号
      */
-    private String getVersion(Context context) {
-        try {
-            PackageManager pm = context.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
-            return String.valueOf(pi.versionCode);
-        } catch (Exception e) {
-            return "";
+    private String getVersion(Context context, boolean isVersionControl) {
+        if (isVersionControl) {
+            try {
+                PackageManager pm = context.getPackageManager();
+                PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+                return String.valueOf(pi.versionCode);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        return "#0.00";
     }
 }

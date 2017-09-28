@@ -1,9 +1,9 @@
-package com.xwl.net.mvplib.sharedpreferences.storage;
+package com.xwl.net.mvplib.db.sharedpreferences.storage;
 
 /**
  * @author: xiewenliang
- * @Filename:
- * @Description:
+ * @Filename: IStorageString
+ * @Description: 字符串类型存储封装
  * @Copyright: Copyright (c) 2017 Tuandai Inc. All rights reserved.
  * @date: 2017/5/10 10:12
  */

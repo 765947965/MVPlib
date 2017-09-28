@@ -1,19 +1,19 @@
-package com.xwl.net.mvplib.sharedpreferences.cryptographic;
+package com.xwl.net.mvplib.db.sharedpreferences.custom;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * @author: xiewenliang
- * @Filename:
+ * @Filename: ContextDecorate
  * @Description: 密钥与密文组装实例
  * @Copyright: Copyright (c) 2017 Tuandai Inc. All rights reserved.
  * @date: 2017/5/11 14:17
  */
 
 public class ContextDecorate implements IContextDecorate {
-    private static final String JSON_KEY = "key";
-    private static final String JSON_VALUE = "value";
+    private static final String JSON_KEY = "$PS_DR_K#";
+    private static final String JSON_VALUE = "$PS_DR_V#";
 
     @Override
     public String getDecorateContext(String key, String cipherText) {
@@ -29,24 +29,14 @@ public class ContextDecorate implements IContextDecorate {
     }
 
     @Override
-    public String getKey(String decorateContext) {
+    public String[] getKeyAndCipherText(String decorateContext) {
         if (decorateContext.startsWith("{") && decorateContext.endsWith("}")) {
             try {
                 JSONObject jsonObject = new JSONObject(decorateContext);
-                return jsonObject.optString(JSON_KEY);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public String getCipherText(String decorateContext) {
-        if (decorateContext.startsWith("{") && decorateContext.endsWith("}")) {
-            try {
-                JSONObject jsonObject = new JSONObject(decorateContext);
-                return jsonObject.optString(JSON_VALUE);
+                String[] array = new String[2];
+                array[0] = jsonObject.optString(JSON_KEY);
+                array[1] = jsonObject.optString(JSON_VALUE);
+                return array;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
