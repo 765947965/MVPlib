@@ -70,19 +70,19 @@ public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends Base
     @Deprecated
     @Override
     public final void setContentView(@LayoutRes int layoutResID) {
-
+        throw new IllegalStateException("this method is deprecated, please use mRootViewGroup replace");
     }
 
     @Deprecated
     @Override
     public final void setContentView(View view) {
-
+        throw new IllegalStateException("this method is deprecated, please use mRootViewGroup replace");
     }
 
     @Deprecated
     @Override
     public final void setContentView(View view, ViewGroup.LayoutParams params) {
-
+        throw new IllegalStateException("this method is deprecated, please use mRootViewGroup replace");
     }
 
     @Override
