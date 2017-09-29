@@ -43,7 +43,8 @@ public abstract class AbstractBusinessActivity<V extends IBaseBusinessView, P ex
      */
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.abstract_business_activity);
+        View mBusinessView = getLayoutInflater().inflate(R.layout.abstract_business_activity, mRootViewGroup, false);
+        mRootViewGroup.addView(mBusinessView);
         LinearLayout mLltMain = (LinearLayout) findViewById(R.id.lltMain);
         int headViewId = createHeadViewId();
         View mContentHeadView = null;

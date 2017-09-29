@@ -67,26 +67,22 @@ public abstract class AbstractMVPActivity<V extends IBaseMVPView, P extends Base
         }
     }
 
+    @Deprecated
     @Override
     public final void setContentView(@LayoutRes int layoutResID) {
-        View view = getLayoutInflater().inflate(layoutResID, null);
-        setContentView(view);
+
     }
 
+    @Deprecated
     @Override
     public final void setContentView(View view) {
-        setContentView(view, null);
+
     }
 
+    @Deprecated
     @Override
     public final void setContentView(View view, ViewGroup.LayoutParams params) {
-        if (view != null) {
-            if (params != null) {
-                mRootViewGroup.addView(view, params);
-            } else {
-                mRootViewGroup.addView(view);
-            }
-        }
+
     }
 
     @Override
