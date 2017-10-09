@@ -21,7 +21,7 @@ import io.reactivex.functions.Consumer;
 
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   DemoActivity
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

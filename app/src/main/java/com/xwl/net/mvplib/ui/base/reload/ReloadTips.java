@@ -11,7 +11,7 @@ import com.xwl.net.mvplib.R;
 
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   ReloadTips
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

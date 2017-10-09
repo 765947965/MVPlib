@@ -7,7 +7,7 @@ import android.content.Context;
 import com.xwl.net.mvplib.net.HttpUtils;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   MyApplication
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

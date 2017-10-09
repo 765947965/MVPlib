@@ -1,7 +1,7 @@
 package com.xwl.net.mvplib.ui.base.contract;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   BaseMVPPresenter
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

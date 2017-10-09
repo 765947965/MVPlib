@@ -14,7 +14,7 @@ import com.xwl.net.mvplib.ui.base.contract.IBaseMVPView;
 
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   AbstractMVPActivity
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

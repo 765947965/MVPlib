@@ -5,7 +5,7 @@ import com.xwl.net.mvplib.ui.base.contract.IBaseBusinessView;
 
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   AbstractBusinessFragment
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

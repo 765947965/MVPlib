@@ -5,7 +5,7 @@ import com.xwl.net.mvplib.net.IRequestManage;
 import com.xwl.net.mvplib.net.bean.CriterionBean;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   AbstractBusinessCallback
  * <br> Description:
  * <br>
  * <br> Author:      谢文良
@@ -14,14 +14,38 @@ import com.xwl.net.mvplib.net.bean.CriterionBean;
 
 public abstract class AbstractBusinessCallback<T> extends AbstractNetWorkCallback<T> {
 
+    /**
+     * <br> Description: 构造函数
+     * <br> Author:      谢文良
+     * <br> Date:        2017/10/9 17:21
+     *
+     * @param mIRequestManage IRequestManage
+     */
     public AbstractBusinessCallback(IRequestManage mIRequestManage) {
-        super(mIRequestManage);
+        this(mIRequestManage, null);
     }
 
+    /**
+     * <br> Description: 构造函数
+     * <br> Author:      谢文良
+     * <br> Date:        2017/10/9 17:21
+     *
+     * @param mIRequestManage IRequestManage
+     * @param tips            tips
+     */
     public AbstractBusinessCallback(IRequestManage mIRequestManage, String tips) {
-        super(mIRequestManage, tips);
+        this(mIRequestManage, tips, false);
     }
 
+    /**
+     * <br> Description: 构造函数
+     * <br> Author:      谢文良
+     * <br> Date:        2017/10/9 17:21
+     *
+     * @param mIRequestManage IRequestManage
+     * @param tips            tips
+     * @param isRetry         isRetry
+     */
     public AbstractBusinessCallback(IRequestManage mIRequestManage, String tips, boolean isRetry) {
         super(mIRequestManage, tips, isRetry);
     }
@@ -41,7 +65,7 @@ public abstract class AbstractBusinessCallback<T> extends AbstractNetWorkCallbac
         } else if (t instanceof CriterionBean) {
             // 主要处理服务器业务逻辑错误
             CriterionBean mCriterionBean = (CriterionBean) t;
-            if (((CriterionBean) t).getReturnCode() != 1) {
+            if (mCriterionBean.getReturnCode() != 1) {
                 Throwable e = new IllegalStateException(mCriterionBean.getReturnMessage());
                 businessFail(t, e);
             } else {

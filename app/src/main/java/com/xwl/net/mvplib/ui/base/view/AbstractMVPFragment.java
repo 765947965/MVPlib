@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   AbstractMVPFragment
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

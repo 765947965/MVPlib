@@ -3,7 +3,7 @@ package com.xwl.net.mvplib.test.contract;
 import com.xwl.net.mvplib.ui.base.contract.IBaseBusinessView;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   IDemoContract
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

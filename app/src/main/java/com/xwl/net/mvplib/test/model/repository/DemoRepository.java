@@ -9,7 +9,7 @@ import com.xwl.net.mvplib.test.model.bean.DemoBean;
 
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   DemoRepository
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

@@ -8,7 +8,7 @@ import com.xwl.net.mvplib.ui.base.contract.IBaseNetWorkView;
 import com.xwl.net.mvplib.ui.base.reload.ReloadTips;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   AbstractNetWorkFragment
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

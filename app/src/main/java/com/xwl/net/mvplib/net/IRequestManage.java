@@ -4,14 +4,14 @@ import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.request.base.Request;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   IRequestManage
  * <br> Description:
  * <br>
  * <br> Author:      谢文良
  * <br> Date:        2017/9/14 9:56
  */
 
-public interface IRequestManage {
+public interface IRequestManage extends IResultCodeActionManage {
     /**
      * <br> Description: 开启开始请求提示语
      * <br> Author:      谢文良

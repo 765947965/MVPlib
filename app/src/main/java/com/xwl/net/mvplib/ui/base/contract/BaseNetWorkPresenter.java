@@ -11,14 +11,15 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   BaseNetWorkPresenter
  * <br> Description:
  * <br>
  * <br> Author:      谢文良
  * <br> Date:        2017/9/14 14:14
  */
 
-public class BaseNetWorkPresenter<V extends IBaseNetWorkView> extends BaseMVPPresenter<V> implements IRequestManage {
+public abstract class BaseNetWorkPresenter<V extends IBaseNetWorkView> extends BaseMVPPresenter<V>
+        implements IRequestManage {
 
     private BlockingQueue<Object> mRequestList = new LinkedBlockingDeque<>();
 

@@ -9,7 +9,7 @@ import com.xwl.net.mvplib.test.model.repository.DemoRepository;
 import com.xwl.net.mvplib.ui.base.contract.BaseBusinessPresenter;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   DemoPresenter
  * <br> Description:
  * <br>
  * <br> Author:      谢文良

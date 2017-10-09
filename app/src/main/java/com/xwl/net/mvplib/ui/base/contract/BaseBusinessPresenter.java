@@ -1,7 +1,9 @@
 package com.xwl.net.mvplib.ui.base.contract;
 
+import com.xwl.net.mvplib.net.bean.CriterionBean;
+
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   BaseBusinessPresenter
  * <br> Description:
  * <br>
  * <br> Author:      谢文良
@@ -30,5 +32,10 @@ public class BaseBusinessPresenter<V extends IBaseBusinessView> extends BaseNetW
         if (mBaseIView != null) {
             mBaseIView.systemExit();
         }
+    }
+
+    @Override
+    public void disposeResultCodeAction(CriterionBean mCriterionBean) {
+        //TODO 对全局统一的网络请求错误code的处理（如停服等）
     }
 }

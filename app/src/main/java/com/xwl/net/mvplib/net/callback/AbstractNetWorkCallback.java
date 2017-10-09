@@ -5,13 +5,14 @@ import com.lzy.okgo.exception.HttpException;
 import com.lzy.okgo.exception.StorageException;
 import com.lzy.okgo.request.base.Request;
 import com.xwl.net.mvplib.net.IRequestManage;
+import com.xwl.net.mvplib.net.bean.CriterionBean;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   AbstractNetWorkCallback
  * <br> Description:  自定义网络处理逻辑
  * <br>
  * <br> Author:      谢文良
@@ -128,6 +129,9 @@ public abstract class AbstractNetWorkCallback<T> extends AbstractJsonCallback<T>
     protected final void businessFail(T t, Throwable e) {
         if (mIsRetry) {
             mIRequestManage.requestFail(t, e);
+        }
+        if (t instanceof CriterionBean) {
+            mIRequestManage.disposeResultCodeAction((CriterionBean) t);
         }
         abstractFail(t, e);
     }

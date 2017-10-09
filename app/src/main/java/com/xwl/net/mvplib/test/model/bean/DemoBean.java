@@ -4,7 +4,7 @@ package com.xwl.net.mvplib.test.model.bean;
 import java.io.Serializable;
 
 /**
- * <br> ClassName:   ${className}
+ * <br> ClassName:   DemoBean
  * <br> Description:
  * <br>
  * <br> Author:      谢文良
